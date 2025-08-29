@@ -1,0 +1,30 @@
+﻿@page "{id:int}"
+@model Pr2Cruds.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Tarea</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Tarea.Nombre)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Tarea.Nombre)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Tarea.FechaVencimiento)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Tarea.FechaVencimiento)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Tarea.Estado)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Tarea.Estado)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(m => m.Tarea.IdUsuario)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(m => m.Tarea.IdUsuario)</dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Tarea.Id" class="btn btn-primary">Edit</a>
+    <a asp-page="./Index" class="btn btn-secondary ms-2">Back to List</a>
+</div>
