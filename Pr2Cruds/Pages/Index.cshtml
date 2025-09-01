@@ -1,40 +1,61 @@
 ﻿@page
 @model Pr2Cruds.Pages.IndexModel
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tareas";
 }
 
-<h1>Index</h1>
+<div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 m-0">Tareas</h1>
+    <a asp-page="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Crear nueva
+    </a>
+</div>
 
-<p>
-    <a asp-page="Create" class="btn btn-primary">Create New</a>
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Tarea[0].Nombre)</th>
-            <th>@Html.DisplayNameFor(model => model.Tarea[0].FechaVencimiento)</th>
-            <th>@Html.DisplayNameFor(model => model.Tarea[0].Estado)</th>
-            <th>@Html.DisplayNameFor(model => model.Tarea[0].IdUsuario)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Tarea)
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Tarea[0].Nombre)</th>
+                        <th>@Html.DisplayNameFor(model => model.Tarea[0].FechaVencimiento)</th>
+                        <th>@Html.DisplayNameFor(model => model.Tarea[0].Estado)</th>
+                        <th>@Html.DisplayNameFor(model => model.Tarea[0].IdUsuario)</th>
+                        <th class="text-center" style="width: 1%; white-space: nowrap;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Tarea)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                            <td>@Html.DisplayFor(modelItem => item.FechaVencimiento)</td>
+                            <td>
+                                <span class="badge bg-light text-dark border">@item.Estado</span>
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.IdUsuario)</td>
+                            <td class="text-center">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Acciones">
+                                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-outline-info">
+                                        <i class="bi bi-info-circle"></i> Detalles
+                                    </a>
+                                    <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @* Si no hay registros *@
+        @if (Model.Tarea == null || !Model.Tarea.Any())
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.FechaVencimiento)</td>
-                <td>@Html.DisplayFor(modelItem => item.Estado)</td>
-                <td>@Html.DisplayFor(modelItem => item.IdUsuario)</td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+            <div class="text-center text-muted py-3">No hay tareas registradas.</div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
